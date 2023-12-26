@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1odshykb1ot2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2l1a"]
+albedo_color = Color(0.207843, 0.917647, 0, 1)
+
+[node name="LandingPad" type="CSGBox3D" groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00774, 0.2, 0.170938)
+use_collision = true
+size = Vector3(2, 0.4, 3)
+material = SubResource("StandardMaterial3D_c2l1a")
