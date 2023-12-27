@@ -50,7 +50,7 @@ material = SubResource("StandardMaterial3D_a0kij")
 [node name="LandingPad" parent="." instance=ExtResource("1_o6cl8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03168, 0.177491, 0.183723)
 script = ExtResource("2_0ayfw")
-file_path = "res://level.tscn"
+file_path = "res://level_4.tscn"
 
 [node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.15808, 0.2, 0.0439062)

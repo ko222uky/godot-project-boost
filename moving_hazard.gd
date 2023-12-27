@@ -17,10 +17,12 @@ extends AnimatableBody3D
 func _ready() -> void:
 	# let's create our tween object
 	var tween = create_tween()
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "global_position", global_position + destination, move_time)
-	tween.tween_property(self, "global_rotation_degrees", global_rotation_degrees + end_rotation, rotate_time)
+	#tween.tween_property(self, "global_rotation_degrees", global_rotation_degrees + end_rotation, rotate_time)
 	tween.tween_property(self, "global_position", global_position, move_time)
-	tween.tween_property(self, "global_rotation_degrees", global_rotation_degrees, rotate_time)
+	#tween.tween_property(self, "global_rotation_degrees", global_rotation_degrees, rotate_time)
 	
 	# we tween, using the self to point to this node, from a starting property to a final property value.
 
