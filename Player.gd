@@ -10,31 +10,40 @@ var timer : float = 0.0
 
 var is_transitioning : bool = false # used to prevent multiple crash/completion functions from running.
 
+# For audio, we need to have access to children nodes. We wait for the _ready() funct
 @onready var explosion_audio: AudioStreamPlayer3D = $ExplosionAudio # for accessing child node, waiting for _ready()
 @onready var success_audio: AudioStreamPlayer = $SuccessAudio
+@onready var engine_thrust_audio: AudioStreamPlayer3D = $EngineThrustAudio
+@onready var small_engine_thrust_audio: AudioStreamPlayer3D = $SmallEngineThrustAudio
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	 
-	#  print(basis.x)
+	#  print(basis.x) prints local rotation vector, which itself has an x,y and z component. 
 	#  print(basis.y.y) prints y-component of Y basis vector	
+	
 	# basic player movement
 	if Input.is_action_pressed("boost"): # input action is spacebar or enter
 		apply_central_force(basis.y * delta * thrust)
-	
-		# multiply by delta to make framerate independent
-		# multiply by 1000 to give a magnitude to our forced
-		# basis.y gives us local rotation of the 3D node
-		
+		if engine_thrust_audio.playing == false: # to prevent audio from restarting every frame
+				engine_thrust_audio.play()
+	else: # to stop audio when we release the input mapping "boost" i.e. spacebar and 'w'
+		engine_thrust_audio.stop()
+			
 	if Input.is_action_pressed("small_thrust"): # input action is spacebar or enter
-		apply_central_force(basis.y * delta * thrust * 0.55)	
-
+		apply_central_force(basis.y * delta * thrust * 0.55)
+		if small_engine_thrust_audio.playing == false:
+			small_engine_thrust_audio.play()			
+	else: # to stop audio when we release the input mapping "small_thrust" i.e. alt
+		small_engine_thrust_audio.stop()
+			
 	if Input.is_action_pressed("rotate_left"):
 		apply_torque(Vector3(0.0, 0.0, torque) * delta) # use constructor to instantiate new Vector3 object
-
-		
+	
 	if Input.is_action_pressed("rotate_right"):
 		apply_torque(Vector3(0.0, 0.0, -torque) * delta)
+	
 		
 # connecting signal to method
 func _on_body_entered(body: Node) -> void:
