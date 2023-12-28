@@ -1,4 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://btgsm6wvdoc1"]
+[gd_scene load_steps=9 format=3 uid="uid://bop2h3etsa8cx"]
+
+[ext_resource type="PackedScene" uid="uid://b1odshykb1ot2" path="res://landing_pad.tscn" id="1_ychv5"]
+[ext_resource type="Script" path="res://landing_pad.gd" id="2_v5cxa"]
+[ext_resource type="PackedScene" uid="uid://b124pt35jypx7" path="res://player.tscn" id="3_8vd84"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_chg5h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,13 +20,10 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k87ra"]
 albedo_color = Color(0.309804, 0.129412, 0.0392157, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2l1a"]
-albedo_color = Color(0.207843, 0.917647, 0, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ba7bb"]
 albedo_color = Color(0, 0.00392157, 1, 1)
 
-[node name="Level" type="Node3D"]
+[node name="level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ngvga")
@@ -31,23 +32,25 @@ environment = SubResource("Environment_ngvga")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Floor" type="CSGBox3D" parent="." groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 use_collision = true
 size = Vector3(30, 8, 5)
 material = SubResource("StandardMaterial3D_k87ra")
 
-[node name="Launch pad" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.63856, 0.2, 0.170938)
-use_collision = true
-size = Vector3(3, 0.4, 3)
-material = SubResource("StandardMaterial3D_c2l1a")
+[node name="LandingPad" parent="." instance=ExtResource("1_ychv5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.05742, 0.2, 0.175155)
+script = ExtResource("2_v5cxa")
+file_path = "res://Level/level_2.tscn"
 
-[node name="Landing pad" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.43699, 0.2, 0.0439062)
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.15808, 0.2, 0.0439062)
 use_collision = true
-size = Vector3(3, 0.4, 3)
+size = Vector3(2, 0.4, 3)
 material = SubResource("StandardMaterial3D_ba7bb")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 2.612, 9.084)
+transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 2.612, 8.206)
+
+[node name="Player" parent="." instance=ExtResource("3_8vd84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.158, 1.4, 0.044)

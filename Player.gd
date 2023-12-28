@@ -10,6 +10,8 @@ var timer : float = 0.0
 
 var is_transitioning : bool = false # used to prevent multiple crash/completion functions from running.
 
+@onready var explosion_audio: AudioStreamPlayer3D = $ExplosionAudio # for accessing child node, waiting for _ready()
+@onready var success_audio: AudioStreamPlayer = $SuccessAudio
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -26,15 +28,14 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_pressed("small_thrust"): # input action is spacebar or enter
 		apply_central_force(basis.y * delta * thrust * 0.55)	
-		
+
 	if Input.is_action_pressed("rotate_left"):
 		apply_torque(Vector3(0.0, 0.0, torque) * delta) # use constructor to instantiate new Vector3 object
-	
+
 		
 	if Input.is_action_pressed("rotate_right"):
 		apply_torque(Vector3(0.0, 0.0, -torque) * delta)
 		
-
 # connecting signal to method
 func _on_body_entered(body: Node) -> void:
 	if "Goal" in body.get_groups() && is_transitioning == false: # checks if string is in list of the body's groups
@@ -45,18 +46,20 @@ func _on_body_entered(body: Node) -> void:
 		
 func crash_sequence() -> void:
 	print("KABOOM!")
-	set_process(false) # stops calling the _process function
+	explosion_audio.play() # play audio attached to our audio node
+	set_process(false) # stops calling the _process function, to prevent calling multiple crash_sequence()
 	is_transitioning = true
 	var tween = create_tween()
-	tween.tween_interval(1.0) # passes a float (in seconds), how long we wait
+	tween.tween_interval(3.0) # passes a float (in seconds), how long we wait
 	tween.tween_callback(get_tree().reload_current_scene)
 	 
 
 func complete_level(next_level_file: String) -> void:
 	print("Safe landing! Level complete!")
+	success_audio.play() 
 	set_process(false)
 	is_transitioning = true
 	var tween = create_tween()
-	tween.tween_interval(1.0)
+	tween.tween_interval(3.0)
 	tween.tween_callback(
 		get_tree().change_scene_to_file.bind(next_level_file)) # using tween to change scene to the next level file

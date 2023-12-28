@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvc1qnl7xv41a"]
+
+[ext_resource type="PackedScene" uid="uid://b1odshykb1ot2" path="res://landing_pad.tscn" id="1_8yjtr"]
+[ext_resource type="Script" path="res://landing_pad.gd" id="2_xytm0"]
+[ext_resource type="PackedScene" uid="uid://uur6e0pah7d0" path="res://floor.tscn" id="3_bj0mg"]
+[ext_resource type="PackedScene" uid="uid://b124pt35jypx7" path="res://player.tscn" id="3_y3la7"]
+[ext_resource type="PackedScene" uid="uid://b255jolddxqb8" path="res://moving_hazard.tscn" id="4_t1aic"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_chg5h"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_60nuy"]
+sky_material = SubResource("ProceduralSkyMaterial_chg5h")
+
+[sub_resource type="Environment" id="Environment_ngvga"]
+background_mode = 2
+sky = SubResource("Sky_60nuy")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0kij"]
+albedo_color = Color(1, 0.0196078, 0.0196078, 1)
+
+[node name="level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ngvga")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.489953, -0.635181, 0.597068, -0.0997442, 0.639564, 0.76224, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0864041, -33.098, -0.0657008)
+use_collision = true
+size = Vector3(300, 2, 100)
+material = SubResource("StandardMaterial3D_a0kij")
+
+[node name="Obstacle2" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0864041, 28.4589, -0.0657008)
+use_collision = true
+size = Vector3(300, 2, 100)
+material = SubResource("StandardMaterial3D_a0kij")
+
+[node name="LandingPad" parent="." instance=ExtResource("1_8yjtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5471, -31.6809, 0.183723)
+script = ExtResource("2_xytm0")
+file_path = "res://Level/level.tscn"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 2.612, 32.6418)
+
+[node name="Player" parent="." instance=ExtResource("3_y3la7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9658, 0, 0)
+
+[node name="MovingHazardFour" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20792, -31.6286, 0.243735)
+destination = Vector3(0, 50, 0)
+move_time = 4.0
+
+[node name="MovingHazardFour2" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0592, -31.6286, 0.243735)
+destination = Vector3(0, 50, 0)
+
+[node name="MovingHazardFive" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5319, -31.6286, 0.243735)
+destination = Vector3(0, 50, 0)
+move_time = 5.0
+
+[node name="MovingHazardFive2" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2118, -31.6286, 0.243735)
+destination = Vector3(0, 50, 0)
+move_time = 6.0
+
+[node name="MovingHazardFive3" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1258, 14.802, 0.243735)
+destination = Vector3(0, -35, 0)
+move_time = 6.0
+
+[node name="MovingHazardFive4" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.27996, 14.802, 0.243735)
+destination = Vector3(0, -35, 0)
+move_time = 6.0
+
+[node name="MovingHazardFive5" parent="." instance=ExtResource("4_t1aic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6695, 14.802, 0.243735)
+destination = Vector3(0, -35, 0)
+
+[node name="Wall" parent="." instance=ExtResource("3_bj0mg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9038, -26.1661, 0.183723)
+size = Vector3(2, 15, 40)
+
+[node name="Wall4" parent="." instance=ExtResource("3_bj0mg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2438, 19.6749, 0.183723)
+size = Vector3(2, 18.2471, 40)
