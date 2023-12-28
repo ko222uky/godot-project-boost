@@ -54,3 +54,5 @@ transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 
 
 [node name="Player" parent="." instance=ExtResource("3_8vd84")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.158, 1.4, 0.044)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
