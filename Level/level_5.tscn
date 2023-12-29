@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvc1qnl7xv41a"]
 
-[ext_resource type="PackedScene" uid="uid://b1odshykb1ot2" path="res://landing_pad.tscn" id="1_8yjtr"]
-[ext_resource type="Script" path="res://landing_pad.gd" id="2_xytm0"]
-[ext_resource type="PackedScene" uid="uid://uur6e0pah7d0" path="res://floor.tscn" id="3_bj0mg"]
-[ext_resource type="PackedScene" uid="uid://b124pt35jypx7" path="res://player.tscn" id="3_y3la7"]
-[ext_resource type="PackedScene" uid="uid://b255jolddxqb8" path="res://moving_hazard.tscn" id="4_t1aic"]
+[ext_resource type="PackedScene" uid="uid://b1odshykb1ot2" path="res://Scenes/landing_pad.tscn" id="1_8yjtr"]
+[ext_resource type="Script" path="res://Scripts/landing_pad.gd" id="2_xytm0"]
+[ext_resource type="PackedScene" uid="uid://uur6e0pah7d0" path="res://Scenes/floor.tscn" id="3_bj0mg"]
+[ext_resource type="PackedScene" uid="uid://b124pt35jypx7" path="res://Scenes/player.tscn" id="3_y3la7"]
+[ext_resource type="PackedScene" uid="uid://b255jolddxqb8" path="res://Scenes/moving_hazard.tscn" id="4_t1aic"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_chg5h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,10 +27,6 @@ albedo_color = Color(1, 0.0196078, 0.0196078, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ngvga")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.489953, -0.635181, 0.597068, -0.0997442, 0.639564, 0.76224, 0, 0, 0)
-shadow_enabled = true
-
 [node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0864041, -33.098, -0.0657008)
 use_collision = true
@@ -39,6 +35,18 @@ material = SubResource("StandardMaterial3D_a0kij")
 
 [node name="Obstacle2" type="CSGBox3D" parent="." groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0864041, 28.4589, -0.0657008)
+use_collision = true
+size = Vector3(300, 2, 100)
+material = SubResource("StandardMaterial3D_a0kij")
+
+[node name="Obstacle3" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(0.0264736, -0.99965, 0, 0.99965, 0.0264736, 0, 0, 0, 1, -35.889, 28.4589, -0.0657008)
+use_collision = true
+size = Vector3(300, 2, 100)
+material = SubResource("StandardMaterial3D_a0kij")
+
+[node name="Obstacle4" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(0.0264736, -0.99965, 0, 0.99965, 0.0264736, 0, 0, 0, 1, 41.4435, 28.4589, -0.0657008)
 use_collision = true
 size = Vector3(300, 2, 100)
 material = SubResource("StandardMaterial3D_a0kij")

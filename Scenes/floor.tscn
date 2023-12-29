@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://uur6e0pah7d0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k87ra"]
+albedo_color = Color(0.309804, 0.129412, 0.0392157, 1)
+
+[node name="Floor" type="CSGBox3D" groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_k87ra")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.973448, 0.186288, 0.133022, -0.227802, 0.731389, 0.642788, 0.0224524, -0.656023, 0.754407, -0.246853, 0, 13.8778)
+shadow_enabled = true
